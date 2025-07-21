@@ -1,0 +1,128 @@
+ifconfig // 인터넷 ip 확인 -> net-tools 설치 안됨
+sudo apt install net-tools  // apt 리포지토리에서 다운받아 설치
+ifconfig // 인터넷 ip 확인 함 -> 오른쪽 상단 네트워크 -> ip변경
+	 // IPv4 수동 -> IP: 192.168.111.106 / 서브넷 255.255.255.0
+         //              게이트웨이 : 192.168.111.2
+         //              DNS : 8.8.8.8
+ls	 // 디렉토리 내용보기
+cd 다운로드 	// 다운로드 디렉토리로 이동
+pwd 	    	// 현재 위치 확인
+cd ..	    	// 상위폴더로 감	
+ls -l	    	// 디렉토리내용 자세히 보기 ls -al // 숨김파일까지 보기
+cd ~	    	// 홈디렉토리로 이동 -> /home/사용자계정명
+mkdir mbc   	// 디렉토리 생성
+chmod 707 mbc 	// 디렉토리 권한 변경 사용자/ 그룹  /그외
+				      4 2 1  4 2 1  4 2 1 
+				      r w x  - - -  r w x
+
+chmod 755 mbc   // 디렉토리 권한 변경 사용자/ 그룹 / 그외
+				      4 2 1  4 2 1  4 2 1 
+				      r w x  r - x  r - x
+
+du		// 디렉토리별 용량
+df		// 파티션별 용량
+whoami		// 로그인한 계정 확인
+
+sudo useradd mbc1 	// sudo 관리자권한으로 실행 (계정생성)
+sudo useradd mbc2
+sudo useradd mbc3
+sudo useradd mbc4
+sudo useradd mbc5
+
+sudo passwd mbc1	// 관리자권한으로 암호 생성
+sudo passwd mbc2
+sudo passwd mbc3
+sudo passwd mbc4
+sudo passwd mbc5
+
+sudo groupadd board	// 사용자를 그룹으로 묶어 관리 (그룹생성)
+
+sudo gpasswd -a mbc1 board	// 사용자들을 그룹으로 연결
+sudo gpasswd -a mbc2 board
+sudo gpasswd -a mbc3 board
+sudo gpasswd -a mbc4 board
+sudo gpasswd -a mbc5 board
+
+touch board.txt			// 연습용 텍스트파일 생성
+ls -l
+sudo chown mbc1 board.txt 	// board.txt의 소유자변경 mbc1
+ls -l
+sudo chgrp board board.txt      // board.txt의 그룹변경 board
+ls -l
+
+ifconfig			// 인터넷 주소 확인
+netstat -an			// 포트 열린것 확인 
+ping 8.8.8.8.			// 통신 테스트 
+ping www.naver.com
+
+sudo systemctl status NetworkManager // 서비스 상태확인
+clear				     // 콘솔창 지우기
+sudo systemctl stop NetworkManager   // 서비스 중지
+sudo systemctl start NetworkManager  // 서비스 시작
+sudo systemctl status NetworkManager // 서비스 상태확인
+
+vi board.txt	// vi 구형편집기로 키보드가 제어가 힘듬.
+chown secu board.txt 	// 권한 부족으로 권한 부여 
+sudo chown secu board.txt  // sudo 권한으로 소유자 변경 성공
+
+sudo apt install vim 		// vi 신형편집기 설치
+vi board.txt 	// 편집하려면 (i,a) -> 저장 -> esc :wq
+cat board.txt 	// 텍스트 내용 확인
+
+sudo apt-get update	// 우분투 os 업데이트
+sudo apt-get install open-vm-tools-desktop // vmtools 설치
+sudo reboot		// 재부팅
+vmware-toolbox-cmd -v 	// 설치 확인
+
+sudo -i			// root계정으로 로그인 
+passwd 1234 		// root에 암호 설정
+
+su - root		// 일반사용자에서 root 계정으로 로그인
+
+ufw status verbose	// 방화벽 상태 확인
+exit 			// root로그아웃 -> 일반사용자로 감
+
+su - root		// 일반사용자에서 root 계정으로 로그인
+
+apt install openjdk-17-jdk		// 자바 jdk 17 설치
+javac -version				// 버전확인
+
+apt install mariadb-server		// 데이터베이스 설치
+systemctl status mariadb		// 데이터베이스 서비스 상태확인
+ufw status				// 방화벽 상태확인
+ufw enable				// 방화벽 켬
+ufw status
+ufw allow 80/tcp			// 80포트 열기
+ufw allow 3306/tcp			// 데이터베이스 포트 열기
+ufw reload				// 갱신
+ufw status verbose			// 열려있는 상태확인
+
+mysql -u root				// 데이터베이스 로그인
+create user 'root'@'%' identified by 'admin';
+					// root에 로그인 pw 설정
+
+grant all privileges on *.* to 'root'@'%' identified by 'admin';
+					// root에 모든권한 부여
+
+CREATE USER 'bootuser'@'%' IDENTIFIED BY 'bootuser';
+					// 웹서버에서 사용할 계정/pw
+
+CREATE DATABASE `bootex` /*!40100 COLLATE 'utf8_general_ci' */;
+					// db 생성
+
+GRANT EXECUTE, SELECT, SHOW VIEW, ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, DROP, EVENT, INDEX, INSERT, REFERENCES, TRIGGER, UPDATE, LOCK TABLES  ON `bootex`.* TO 'bootuser'@'%' WITH GRANT OPTION;
+					// db에 계정 연결 및 권한부여
+
+FLUSH PRIVILEGES;	// 활성화
+
+exit 			// db 설정 종료
+
+cd /usr/lib/jvm/java-17-openjdk-amd64	// JAVA 설치 위치 확인하고!	
+vi /etc/environment	
+	// PATH 등록 JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
+
+================ 완성된 boot jar을 다운로드에 붙이기==========
+
+cd /home/secu/다운로드/ 	// jar파일 저장
+chmod 777 board-0.0.1-SNAPSHOT.jar  // 권한부여
+java -jar board-0.0.1-SNAPSHOT.jar  // 배포 시작!
