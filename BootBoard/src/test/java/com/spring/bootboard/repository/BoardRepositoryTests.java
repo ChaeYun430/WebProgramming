@@ -1,6 +1,6 @@
-package com.lcy.bootboard.repository;
+package com.spring.bootboard.repository;
 
-import com.lcy.bootboard.domain.Board;
+import com.spring.bootboard.domain.Board;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

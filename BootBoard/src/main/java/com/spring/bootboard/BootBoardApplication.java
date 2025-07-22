@@ -1,4 +1,4 @@
-package com.lcy.bootboard;
+package com.spring.bootboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

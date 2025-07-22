@@ -1,20 +1,13 @@
-package com.lcy.bootboard.controller;
+package com.spring.bootboard.controller;
 
 import lombok.extern.log4j.Log4j2;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Log4j2
-public class ControllerBase {
+public class ControllerBaseRest {
 
-    //Thymeleaf 이용
-    @GetMapping("/base")
-    public void base(Model model){
-        log.info("base");
-        model.addAttribute("msg", "Wellcome Controller");
-    }
 
     //API서버(순수한 데이터만 전송) 제작
     //JSON (JavaScript Object Notation) : 구조를 가진 데이터(객체)를 자바스크립트의 "객체표기법"으로 표현한 순수한 문자열
