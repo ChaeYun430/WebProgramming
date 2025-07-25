@@ -1,7 +1,7 @@
-package com.spring.bootboard.controller;
+package com.lcy.bootboard.controller;
 
 
-import com.spring.bootboard.dto.ReplyDTO;
+import com.lcy.bootboard.dto.ReplyDTO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

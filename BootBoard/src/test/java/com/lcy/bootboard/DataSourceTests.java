@@ -1,4 +1,4 @@
-package com.spring.bootboard;
+package com.lcy.bootboard;
 
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;

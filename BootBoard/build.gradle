@@ -1,3 +1,9 @@
+buildscript {//  Gradle이 특정 task를 실행할 때 사용하는 설정
+    ext {//   // build.gradle 에서 사용하는 전역변수 설정
+       queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.3'
@@ -42,9 +48,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    //서버에서 검증 후 등록
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-
     //테스트
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
@@ -52,12 +55,17 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 
+    //Querydsl 관련 (entity 없다는 오류)
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
 
-    //DataSource Bean문제 해결
     annotationProcessor(
+            //2줄로 DataSource Bean문제 해결
             "jakarta.persistence:jakarta.persistence-api",
-            "jakarta.annotation:jakarta.annotation-api"
+            "jakarta.annotation:jakarta.annotation-api",
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
     )
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+
 }
 
 dependencyManagement {
@@ -66,8 +74,16 @@ dependencyManagement {
     }
 }
 
-
-
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+sourceSets{// default로 프로젝트 하위의 src/main/java 디렉터리의 파일이 target이 되어 빌드됨
+    main{
+        java{
+            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
+        }
+    }
+}
+
+compileJava.dependsOn('clean')

@@ -1,4 +1,4 @@
-package com.spring.bootboard.dto;
+package com.lcy.bootboard.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

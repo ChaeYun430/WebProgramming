@@ -1,4 +1,4 @@
-package com.spring.bootboard.domain;
+package com.lcy.bootboard.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
