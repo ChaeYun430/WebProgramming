@@ -68,7 +68,8 @@ dependencies {
     //modelmapper 설정
     implementation "org.modelmapper:modelmapper:3.2.4"
 
-    
+    implementation "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.4.0"
+
     implementation "org.springframework.boot:spring-boot-starter-validation"
 
 }
