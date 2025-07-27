@@ -1,10 +1,13 @@
 package com.lcy.bootboard.service;
 
 import com.lcy.bootboard.dto.BoardDTO;
+import com.lcy.bootboard.dto.PageRequestDTO;
+import com.lcy.bootboard.dto.PageResponseDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 
 @SpringBootTest
 @Log4j2
@@ -36,5 +39,18 @@ public class BoardServiceTests {
                 .content("testModify...content")
                 .build();
         boardService.modify(boardDTO);
+    }
+
+    @Test
+    public void testList() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .type("tcw")
+                .keyword("1")
+                .page(1)
+                .size(10)
+                .build();
+
+        PageResponseDTO<BoardDTO> pageResponseDTO = boardService.list(pageRequestDTO);
+        log.info(pageResponseDTO);
     }
 }

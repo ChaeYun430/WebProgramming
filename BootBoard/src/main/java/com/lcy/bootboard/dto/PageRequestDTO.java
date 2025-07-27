@@ -58,12 +58,9 @@ public class PageRequestDTO {
                 try{
                     builder.append("&keyword="+ URLEncoder.encode(keyword, "UTF-8"));
                 }catch (UnsupportedEncodingException e){
-
                 }
             }
         }
         return link;
     }
-
-
 }
